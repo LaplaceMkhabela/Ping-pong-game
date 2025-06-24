@@ -7,16 +7,18 @@ const playerH = 100;
 
 const playerA = {
     name:"Player A",
-    x: 10,
-    y: (height/2) - playerH,
-    score: 0
+    x: 0,
+    y: (height/2) - playerH/2,
+    score: 0,
+    color: "white"
 }
 
 const playerB = {
     name:"Player B",
-    x: w - 10 - playerW,
-    y: (height/2) - playerH,
-    score: 0
+    x: w - playerW,
+    y: (height/2) - playerH/2,
+    score: 0,
+    color: "white"
 }
 
 const ball = {
