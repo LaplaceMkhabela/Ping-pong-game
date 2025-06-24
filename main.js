@@ -25,14 +25,23 @@ const ball = {
   
 }
 
-function drawPlayer(x,y,width,height,color){
+const net = {
+    x: (w/2 - 2/2),
+    y: 0,
+    width: 2,
+    height: 10,
+    color: "white"
+}
+
+function drawRect(x,y,width,height,color){
   ctx.fillStyle = color;
   ctx.fillRect(x,y,width,height)
 }
 
-function drawNet(x,y,width,height,color){
-  ctx.fillStyle = color;
-  ctx.fillRect(x,y,width,height);
+function drawNet(net){
+     for(i = 0; i < w;i+=15){
+         drawRect(net.x,net.y + i,net.width,net.height,net.color);
+     }
 }
 
 function drawBall(x,y,radius,color){
