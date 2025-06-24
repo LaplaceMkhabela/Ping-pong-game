@@ -22,6 +22,10 @@ const playerB = {
 }
 
 const ball = {
+    x: w/2,
+    y: y/2,
+    radius: 10,
+    color: "white"
   
 }
 
@@ -40,7 +44,7 @@ function drawRect(x,y,width,height,color){
 
 function drawNet(net){
      for(i = 0; i < w;i+=15){
-         drawRect(net.x,net.y + i,net.width,net.height,net.color);
+         drawRectyer(net.x,net.y + i,net.width,net.height,net.color);
      }
 }
 
@@ -55,4 +59,13 @@ function drawText(x,y,text,color){
   ctx.fillStyle = color;
   ctx.font = "20px Poppins";
   ctx.fillText(text,x,y);
+}
+
+function render(){
+    drawText(w/4,h/5,playerA.score,playerA.color);
+    drawText(3*w/4,h/5,playerB.score,playerB.color);
+    drawNet(net);
+    drawRect(playerA.x,playerA.y,playerA.width,playerA.height,player.color);
+    drawRect(playerB.x,playerB.y,playerB.width,playerB.height,player.color);
+    drawBall(ball.x,ball.y,ball.radius,ball.color);
 }
