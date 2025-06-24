@@ -5,6 +5,23 @@ const h = 400;
 const playerW = 20;
 const PlayerH = 100;
 
+const playerA = {
+    name:"Player A",
+    x: 10,
+    y: (height/2) - playerH,
+    score: 0
+}
+
+const playerB = {
+    name:"Player B",
+    x: w - 10 - playerW,
+    y: (height/2) - playerH,
+    score: 0
+}
+
+const ball = {
+  
+}
 
 function drawPlayer(x,y,width,height,color){
   ctx.fillStyle = color;
