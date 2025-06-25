@@ -4,6 +4,7 @@ const w = 600;
 const h = 400;
 const playerW = 20;
 const playerH = 100;
+const fps = 50;
 
 const playerA = {
     name:"Player A",
@@ -25,7 +26,10 @@ const ball = {
     x: w/2,
     y: y/2,
     radius: 10,
-    color: "white"
+    color: "white",
+    speed: 5,
+    velocityX: 5,
+    velocityY: 5
   
 }
 
@@ -62,6 +66,7 @@ function drawText(x,y,text,color){
 }
 
 function render(){
+    drawRect(0,0,w,h,"black");
     drawText(w/4,h/5,playerA.score,playerA.color);
     drawText(3*w/4,h/5,playerB.score,playerB.color);
     drawNet(net);
@@ -69,3 +74,22 @@ function render(){
     drawRect(playerB.x,playerB.y,playerB.width,playerB.height,player.color);
     drawBall(ball.x,ball.y,ball.radius,ball.color);
 }
+
+
+function update(){
+    ball.x += ball.velocityX;
+    ball.y += ball.velocityY;
+
+    if(ball.y + ball.radius > h || ball.y + ball.radius < 0){
+        ball.velocityX = -ball.velocityX();
+    }
+}
+
+
+function game(){
+    update();
+    render();
+}
+
+
+setInterval(game,1000/fps);
