@@ -2,7 +2,7 @@ const root = document.getElementById('root');
 const ctx = root.getContext('2d');
 const playerW = 20;
 const playerH = 100;
-const fps = 50;
+const fps = 1000/50;
 
 const playerA = {
     name:"Player A",
@@ -59,7 +59,7 @@ function drawBall(x,y,radius,color){
 
 function drawText(x,y,text,color){
   ctx.fillStyle = color;
-  ctx.font = "20px Poppins";
+  ctx.font = "50px Poppins";
   ctx.fillText(text,x,y);
 }
 
@@ -72,13 +72,27 @@ function drawNet(net){
 
 function render(){
     drawRect(0,0,root.width,root.height,"BLACK");
-    drawText(root.width/4,root.height/10,playerA.score,playerA.color);
-    drawText(3*root.width/4,root.height/10,playerB.score,playerB.color);
+    drawText(root.width/4,root.height/7,playerA.score,playerA.color);
+    drawText(3*root.width/4,root.height/7,playerB.score,playerB.color);
     drawNet(net);
     drawRect(playerA.x,playerA.y,playerA.width,playerA.height,playerA.color);
     drawRect(playerB.x,playerB.y,playerB.width,playerB.height,playerB.color);
     drawBall(ball.x,ball.y,ball.radius,ball.color);
 }
 
+function update(){
+    ball.x += ball.velocityX;
+    ball.y += ball.velocityY;
 
-render();
+    if(ball.y+ball.radius < 0 || ball.y+ball.radius > root.height){
+        ball.velocityY = -ball.velocityY;
+    }
+
+}
+
+function game(){
+    update();
+    render();
+}
+
+setInterval(game,fps);
