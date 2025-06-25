@@ -1,7 +1,5 @@
 const root = document.getElementById('root');
 const ctx = root.getContext('2d');
-const w = 600;
-const h = 400;
 const playerW = 20;
 const playerH = 100;
 const fps = 50;
@@ -9,22 +7,27 @@ const fps = 50;
 const playerA = {
     name:"Player A",
     x: 0,
-    y: (height/2) - playerH/2,
+    y: (root.height/2) - playerH/2,
+    height:playerH,
+    width:playerW,
     score: 0,
     color: "white"
 }
 
 const playerB = {
     name:"Player B",
-    x: w - playerW,
-    y: (height/2) - playerH/2,
+    x: root.width - playerW,
+    y: (root.height/2) - playerH/2,
+    height:playerH,
+    width:playerW,
     score: 0,
     color: "white"
 }
 
+
 const ball = {
-    x: w/2,
-    y: y/2,
+    x: root.width/2,
+    y: root.height/2,
     radius: 10,
     color: "white",
     speed: 5,
@@ -34,7 +37,7 @@ const ball = {
 }
 
 const net = {
-    x: (w/2 - 2/2),
+    x: (root.width/2 - 2/2),
     y: 0,
     width: 2,
     height: 10,
@@ -43,13 +46,7 @@ const net = {
 
 function drawRect(x,y,width,height,color){
   ctx.fillStyle = color;
-  ctx.fillRect(x,y,width,height)
-}
-
-function drawNet(net){
-     for(i = 0; i < w;i+=15){
-         drawRectyer(net.x,net.y + i,net.width,net.height,net.color);
-     }
+  ctx.fillRect(x,y,width,height);
 }
 
 function drawBall(x,y,radius,color){
@@ -57,6 +54,7 @@ function drawBall(x,y,radius,color){
   ctx.beginPath();
   ctx.arc(x,y,radius,0,2*Math.PI);
   ctx.closePath();
+  ctx.fill(); 
 }
 
 function drawText(x,y,text,color){
@@ -65,31 +63,22 @@ function drawText(x,y,text,color){
   ctx.fillText(text,x,y);
 }
 
+function drawNet(net){
+     for(i = 0; i < root.height;i+=15){
+         drawRect(net.x,net.y + i,net.width,net.height,net.color);
+     }
+}
+
+
 function render(){
-    drawRect(0,0,w,h,"black");
-    drawText(w/4,h/5,playerA.score,playerA.color);
-    drawText(3*w/4,h/5,playerB.score,playerB.color);
+    drawRect(0,0,root.width,root.height,"BLACK");
+    drawText(root.width/4,root.height/10,playerA.score,playerA.color);
+    drawText(3*root.width/4,root.height/10,playerB.score,playerB.color);
     drawNet(net);
-    drawRect(playerA.x,playerA.y,playerA.width,playerA.height,player.color);
-    drawRect(playerB.x,playerB.y,playerB.width,playerB.height,player.color);
+    drawRect(playerA.x,playerA.y,playerA.width,playerA.height,playerA.color);
+    drawRect(playerB.x,playerB.y,playerB.width,playerB.height,playerB.color);
     drawBall(ball.x,ball.y,ball.radius,ball.color);
 }
 
 
-function update(){
-    ball.x += ball.velocityX;
-    ball.y += ball.velocityY;
-
-    if(ball.y + ball.radius > h || ball.y + ball.radius < 0){
-        ball.velocityX = -ball.velocityX();
-    }
-}
-
-
-function game(){
-    update();
-    render();
-}
-
-
-setInterval(game,1000/fps);
+render();
