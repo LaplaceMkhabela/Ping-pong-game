@@ -56,7 +56,7 @@ function drawBall(x,y,radius,color){
   ctx.fillStyle = color;
   ctx.beginPath();
   ctx.arc(x,y,radius,0,2*Math.PI);
-  ctx.ClosePath();
+  ctx.closePath();
 }
 
 function drawText(x,y,text,color){
